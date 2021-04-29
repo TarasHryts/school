@@ -50,7 +50,7 @@ public class ContactController {
 
     @PostMapping("/load_contact")
     public void load(@RequestBody String string) {
-        contactService.loadContacts(ReadFromFileUtil.readDataFromFile(string));
+        contactService.loadContacts(ReadFromFileUtil.readContactListFromFile(string));
     }
 
     @GetMapping("/all")

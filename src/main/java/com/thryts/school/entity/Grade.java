@@ -24,6 +24,13 @@ public class Grade {
     private Long classId;
     @Column(name = "grade_name")
     private String gradeName;
+    @Column(name = "academic_level")
+    private Integer academicLevel;
     @OneToMany(mappedBy = "grade")
     private Set<Student> students = new HashSet<>();
+
+    public Grade(String gradeName, Integer academicLevel) {
+        this.gradeName = gradeName;
+        this.academicLevel = academicLevel;
+    }
 }

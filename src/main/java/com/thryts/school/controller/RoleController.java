@@ -1,6 +1,7 @@
 package com.thryts.school.controller;
 
 import com.thryts.school.dto.RoleDto;
+import com.thryts.school.dto.util.ReadFromFileUtil;
 import com.thryts.school.dto.util.RoleDtoUtil;
 import com.thryts.school.entity.Role;
 import com.thryts.school.services.RoleService;
@@ -23,6 +24,11 @@ public class RoleController {
     @Autowired
     public RoleController(RoleService roleService) {
         this.roleService = roleService;
+    }
+
+    @PostMapping("/load_roles")
+    public void load(@RequestBody String string) {
+        roleService.loadRoles(ReadFromFileUtil.readRolesListFromFIle(string));
     }
 
     @PostMapping("/add")
