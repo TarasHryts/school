@@ -1,7 +1,8 @@
 package com.thryts.school.controller;
 
-import com.thryts.school.entity.Grade;
+import com.thryts.school.entity.Student;
 import com.thryts.school.services.GradeService;
+import com.thryts.school.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,22 +13,24 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/grade")
-public class GradeController {
+@RequestMapping("/student")
+public class StudentController {
+    private StudentService studentService;
     private GradeService gradeService;
 
     @Autowired
-    public GradeController(GradeService gradeService) {
+    public StudentController(StudentService studentService, GradeService gradeService) {
+        this.studentService = studentService;
         this.gradeService = gradeService;
     }
 
-    @PostMapping("/load_grades")
-    public void load(@RequestParam String fileName) {
-        gradeService.loadGrades(fileName);
+    @PostMapping("/load_students")
+    public void load(@RequestParam("fileName") String fileName) {
+        studentService.loadStudents(fileName);
     }
 
     @GetMapping("/all")
-    public List<Grade> getAllGrades() {
-        return gradeService.getAllGrades();
+    public List<Student> getAllStudents() {
+        return studentService.getAllStudents();
     }
 }

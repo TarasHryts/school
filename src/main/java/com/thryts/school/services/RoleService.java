@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RoleService {
-    List<Role> loadRoles(List<Role> roleList);
+    List<Role> loadRoles(String fileName);
 
     Optional<Role> create(Role role);
 

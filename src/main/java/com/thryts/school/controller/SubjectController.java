@@ -1,13 +1,12 @@
 package com.thryts.school.controller;
 
-import com.thryts.school.dto.util.ReadFromFileUtil;
 import com.thryts.school.entity.Subject;
 import com.thryts.school.services.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,9 +21,9 @@ public class SubjectController {
         this.subjectService = subjectService;
     }
 
-    @PostMapping("/load_service")
-    public void load(@RequestBody String string) {
-        subjectService.loadSubjects(ReadFromFileUtil.readSubjectsListFromFIle(string));
+    @PostMapping("/load_subjects")
+    public void load(@RequestParam String fileName) {
+        subjectService.loadSubjects(fileName);
     }
 
     @GetMapping("/all")

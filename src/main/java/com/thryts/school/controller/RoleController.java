@@ -1,7 +1,6 @@
 package com.thryts.school.controller;
 
 import com.thryts.school.dto.RoleDto;
-import com.thryts.school.dto.util.ReadFromFileUtil;
 import com.thryts.school.dto.util.RoleDtoUtil;
 import com.thryts.school.entity.Role;
 import com.thryts.school.services.RoleService;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -27,8 +27,8 @@ public class RoleController {
     }
 
     @PostMapping("/load_roles")
-    public void load(@RequestBody String string) {
-        roleService.loadRoles(ReadFromFileUtil.readRolesListFromFIle(string));
+    public void load(@RequestParam String fileName) {
+        roleService.loadRoles(fileName);
     }
 
     @PostMapping("/add")

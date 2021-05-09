@@ -1,4 +1,4 @@
-package com.thryts.school.controller;
+/*package com.thryts.school.controller;
 
 import com.thryts.school.dto.ContactDto;
 import com.thryts.school.dto.RoleDto;
@@ -53,7 +53,7 @@ public class DataInitializer {
 //        Contact firstContact = ContactDtoUtil.createContactFromDto()
 
     }
-}
+}*/
 /*
     private void saveData() {
         User userPetro = UserDtoUtil.createUserFromDto(new UserDto("Petro", "kjk@kj.jdd", "1", "1"));

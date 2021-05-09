@@ -18,11 +18,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "teacher")
 public class Teacher extends Contact{
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "teacher_id")
-//    private Long teacherId;
-
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "teacher_grade",
         joinColumns = @JoinColumn(name = "contact_id", referencedColumnName = "contact_id"),
@@ -34,10 +29,4 @@ public class Teacher extends Contact{
         joinColumns = @JoinColumn(name = "contact_id", referencedColumnName = "contact_id"),
         inverseJoinColumns = @JoinColumn(name = "subject_id", referencedColumnName = "subject_id"))
     private Set<Subject> subjects = new HashSet<>();
-
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinTable(name = "teacher_parent",
-//        joinColumns = @JoinColumn(name = "teacher_id", referencedColumnName = "contact_id"),
-//        inverseJoinColumns = @JoinColumn(name = "parent_id", referencedColumnName = "contact_id"))
-//    private Set<Parent> parents = new HashSet<>();
 }

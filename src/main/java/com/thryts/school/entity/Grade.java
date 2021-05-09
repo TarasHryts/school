@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,8 +27,6 @@ public class Grade {
     private String gradeName;
     @Column(name = "academic_level")
     private Integer academicLevel;
-    @OneToMany(mappedBy = "grade")
-    private Set<Student> students = new HashSet<>();
 
     public Grade(String gradeName, Integer academicLevel) {
         this.gradeName = gradeName;

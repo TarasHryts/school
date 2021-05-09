@@ -2,7 +2,6 @@ package com.thryts.school.controller;
 
 import com.thryts.school.dto.ContactDto;
 import com.thryts.school.dto.util.ContactDtoUtil;
-import com.thryts.school.dto.util.ReadFromFileUtil;
 import com.thryts.school.entity.Contact;
 import com.thryts.school.services.ContactService;
 import io.swagger.annotations.ApiOperation;
@@ -49,8 +48,8 @@ public class ContactController {
     }
 
     @PostMapping("/load_contact")
-    public void load(@RequestBody String string) {
-        contactService.loadContacts(ReadFromFileUtil.readContactListFromFile(string));
+    public void load(@RequestBody String fileName) {
+        contactService.loadContacts(fileName);
     }
 
     @GetMapping("/all")
