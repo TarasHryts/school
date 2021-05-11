@@ -14,10 +14,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Data
@@ -29,19 +29,21 @@ public class Schedule {
     @Column(name = "schedule_id")
     private Long scheduleId;
 
-    @Column(name = "day_of_week")
-    private String dayOfWeek;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "day_id", referencedColumnName = "day_id")
+    private Day dayOfWeek;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "schedule_subject",
         joinColumns = @JoinColumn(name = "schedule_id", referencedColumnName = "schedule_id"),
         inverseJoinColumns = @JoinColumn(name = "subject_id", referencedColumnName = "subject_id"))
-    private Set<Subject> subjects = new HashSet<>();
+    private List<Subject> subjects = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "grade_id", referencedColumnName = "grade_id")
     private Grade grade;
 
-    public Schedule(String dayOfWeek) {
+    public Schedule(Day dayOfWeek) {
         this.dayOfWeek = dayOfWeek;
     }
 }

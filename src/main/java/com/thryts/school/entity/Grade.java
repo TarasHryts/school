@@ -23,7 +23,7 @@ public class Grade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "grade_id")
     private Long classId;
-    @Column(name = "grade_name")
+    @Column(name = "grade_name", unique = true)
     private String gradeName;
     @Column(name = "academic_level")
     private Integer academicLevel;

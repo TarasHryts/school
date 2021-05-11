@@ -16,6 +16,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -43,16 +44,19 @@ public class Contact {
     private Integer age;
     @Column(name = "birth_day")
     private LocalDate birthDayDate;
+    @Column(name = "email", unique = true)
     private String email;
     private String password;
     @Column(name = "is_active")
     private Boolean isActive;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "gender_id", referencedColumnName = "gender_id")
+    private Gender gender;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "contacts_roles",
             joinColumns = @JoinColumn(name = "contact_id", referencedColumnName = "contact_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"))
     private Set<Role> roles = new HashSet<>();
-
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "parent_student",
             joinColumns = @JoinColumn(name = "parent_id", referencedColumnName = "contact_id"),

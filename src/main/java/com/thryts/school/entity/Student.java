@@ -24,9 +24,6 @@ public class Student extends Contact {
                    LocalDate birthDayDate, String email, String password) {
         super(firstName, lastName, surName, age, birthDayDate, email, password);
     }
-    @Column(name = "sex")
-    private String sex;
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "grade_id", referencedColumnName = "grade_id")
     private Grade grade;

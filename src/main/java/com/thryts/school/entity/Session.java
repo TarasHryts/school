@@ -37,7 +37,7 @@ public class Session {
     @JoinColumn(name = "student_id", referencedColumnName = "contact_id")
     private Student student;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "contact_id", referencedColumnName = "contact_id")
+    @JoinColumn(name = "teacher_id", referencedColumnName = "contact_id")
     private Teacher teacher;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "subject_id", referencedColumnName = "subject_id")
