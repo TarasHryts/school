@@ -54,4 +54,9 @@ public class DayServiceImpl implements DayService {
         return dayRepository
                 .findByNameEngOrNameEngShortOrNameUkrOrNameUkrShort(name, nameEngShort, nameUkr, nameUkrShort);
     }
+
+    @Override
+    public Optional<Day> findByEngName(String nameEng) {
+        return dayRepository.findByNameEng(nameEng);
+    }
 }

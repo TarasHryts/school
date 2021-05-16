@@ -6,14 +6,7 @@ import com.thryts.school.dto.util.ContactDtoUtil;
 import com.thryts.school.dto.util.RoleDtoUtil;
 import com.thryts.school.entity.Contact;
 import com.thryts.school.entity.Role;
-import com.thryts.school.services.ContactService;
-import com.thryts.school.services.DayService;
-import com.thryts.school.services.GenderService;
-import com.thryts.school.services.GradeService;
-import com.thryts.school.services.RoleService;
-import com.thryts.school.services.ScheduleService;
-import com.thryts.school.services.StudentService;
-import com.thryts.school.services.SubjectService;
+import com.thryts.school.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,6 +30,8 @@ public class DataInitializerController {
     private static final String SCHEDULE = "schedule.csv";
     private static final String STUDENT = "st.csv";//"students.csv";
     private static final String SUBJECT = "subjects.csv";
+    private static final String TEACHER = "teachers.csv";
+    private static final String SESSION_TIME = "sessionTime.csv";
     private final ContactService contactService;
     private final DayService dayService;
     private final GenderService genderService;
@@ -45,6 +40,8 @@ public class DataInitializerController {
     private final ScheduleService scheduleService;
     private final StudentService studentService;
     private final SubjectService subjectService;
+    private final TeacherService teacherService;
+    private final SessionTimeService sessionTimeService;
 
     @Autowired
     public DataInitializerController(ContactService contactService,
@@ -54,7 +51,9 @@ public class DataInitializerController {
                                      RoleService roleService,
                                      ScheduleService scheduleService,
                                      StudentService studentService,
-                                     SubjectService subjectService) {
+                                     SubjectService subjectService,
+                                     TeacherService teacherService,
+                                     SessionTimeService sessionTimeService) {
         this.contactService = contactService;
         this.dayService = dayService;
         this.genderService = genderService;
@@ -63,10 +62,15 @@ public class DataInitializerController {
         this.scheduleService = scheduleService;
         this.studentService = studentService;
         this.subjectService = subjectService;
+        this.teacherService = teacherService;
+        this.sessionTimeService = sessionTimeService;
     }
 
     @PostMapping("/load_data")
     public void load() {
+        if (sessionTimeService.getAllSessionTimes().size() == 0) {
+            sessionTimeService.loadSessionTime(WAY_TO_FOLDER + SESSION_TIME);
+        }
         if (dayService.getAllDays().size() == 0) {
             dayService.loadDays(WAY_TO_FOLDER + DAY);
         }
@@ -90,6 +94,9 @@ public class DataInitializerController {
         }
         if (scheduleService.getAllSchedule().size() == 0) {
             scheduleService.loadSchedule(WAY_TO_FOLDER + SCHEDULE);
+        }
+        if (teacherService.getAllTeachers().size() == 0) {
+            teacherService.loadTeacher(WAY_TO_FOLDER + TEACHER);
         }
     }
 }

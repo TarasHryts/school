@@ -16,7 +16,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 @Entity
@@ -29,15 +28,15 @@ public class Schedule {
     @Column(name = "schedule_id")
     private Long scheduleId;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "day_id", referencedColumnName = "day_id")
     private Day dayOfWeek;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "schedule_subject",
+    @JoinTable(name = "schedule_subject_ordered",
         joinColumns = @JoinColumn(name = "schedule_id", referencedColumnName = "schedule_id"),
-        inverseJoinColumns = @JoinColumn(name = "subject_id", referencedColumnName = "subject_id"))
-    private List<Subject> subjects = new ArrayList<>();
+        inverseJoinColumns = @JoinColumn(name = "subject_ordered_id", referencedColumnName = "subject_ordered_id"))
+    private List<SubjectOrder> subjectOrders = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "grade_id", referencedColumnName = "grade_id")

@@ -15,13 +15,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/student")
 public class StudentController {
-    private StudentService studentService;
-    private GradeService gradeService;
+    private final StudentService studentService;
 
     @Autowired
-    public StudentController(StudentService studentService, GradeService gradeService) {
+    public StudentController(StudentService studentService) {
         this.studentService = studentService;
-        this.gradeService = gradeService;
     }
 
     @PostMapping("/load_students")

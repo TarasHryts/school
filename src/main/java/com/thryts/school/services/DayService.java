@@ -12,4 +12,6 @@ public interface DayService {
     List<Day> getAllDays();
 
     Optional<Day> findByName(String name, String nameEngShort, String nameUkr, String nameUkrShort);
+
+    Optional<Day> findByEngName(String nameEng);
 }

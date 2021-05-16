@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface DayRepository extends JpaRepository<Day, Long> {
     Optional<Day> findByNameEngOrNameEngShortOrNameUkrOrNameUkrShort(String name, String nameEngShort,
                                                                      String nameUkr, String nameUkrShort);
+    Optional<Day> findByNameEng(String nameEng);
 }
