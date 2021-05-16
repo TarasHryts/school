@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RoleService {
+    List<Role> loadRoles(String fileName);
+
     Optional<Role> create(Role role);
 
     Optional<Role> getById(Long roleId);

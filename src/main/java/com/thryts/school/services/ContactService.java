@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface ContactService {
     Optional<Contact> create(Contact contact);
 
-    List<Contact> loadContacts(List<Contact> contactList);
+    List<Contact> loadContacts(String fileName);
 
     Optional<Contact> update(Long contactId, ContactDto contactDto);
 

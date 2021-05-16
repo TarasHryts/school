@@ -4,12 +4,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,6 +20,10 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "student")
 public class Student extends Contact {
+    public Student(String firstName, String lastName, String surName, Integer age,
+                   LocalDate birthDayDate, String email, String password) {
+        super(firstName, lastName, surName, age, birthDayDate, email, password);
+    }
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "grade_id", referencedColumnName = "grade_id")
     private Grade grade;

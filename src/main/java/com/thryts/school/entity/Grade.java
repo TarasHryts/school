@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,8 +23,13 @@ public class Grade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "grade_id")
     private Long classId;
-    @Column(name = "grade_name")
+    @Column(name = "grade_name", unique = true)
     private String gradeName;
-    @OneToMany(mappedBy = "grade")
-    private Set<Student> students = new HashSet<>();
+    @Column(name = "academic_level")
+    private Integer academicLevel;
+
+    public Grade(String gradeName, Integer academicLevel) {
+        this.gradeName = gradeName;
+        this.academicLevel = academicLevel;
+    }
 }

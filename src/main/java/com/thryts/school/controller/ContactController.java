@@ -2,7 +2,6 @@ package com.thryts.school.controller;
 
 import com.thryts.school.dto.ContactDto;
 import com.thryts.school.dto.util.ContactDtoUtil;
-import com.thryts.school.dto.util.ReadFromFileUtil;
 import com.thryts.school.entity.Contact;
 import com.thryts.school.services.ContactService;
 import io.swagger.annotations.ApiOperation;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
@@ -24,7 +24,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/contact")
 public class ContactController {
-
     private ContactService contactService;
 
     @Autowired
@@ -49,8 +48,8 @@ public class ContactController {
     }
 
     @PostMapping("/load_contact")
-    public void load(@RequestBody String string) {
-        contactService.loadContacts(ReadFromFileUtil.readDataFromFile(string));
+    public void load(@RequestParam String fileName) {
+        contactService.loadContacts(fileName);
     }
 
     @GetMapping("/all")
@@ -131,10 +130,5 @@ public class ContactController {
         contact.setBirthDayDate(LocalDate.parse("2012-05-05"));
         contact.setIsActive(true);
         contactService.create(contact);
-//        contactService.create(new Contact("first", "last", "sur", 5, "kjkl@lk.lj"));
-//        contactService.create(new Contact("first1", "last1", "sur1", 1, "kjkl@lk.lj"));
-//        contactService.create(new Contact("first2", "last2", "sur2", 5, "k2jkl@lk.lj"));
-//        contactService.create(new Contact("first3", "last3", "sur3", 33, "k3l@lk.lj"));
-//        contactService.create(new Contact("first4", "last4", "sur4", 4, "k4@lk.lj"));
     }
 }

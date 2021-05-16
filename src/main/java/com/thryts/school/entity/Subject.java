@@ -22,12 +22,20 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "subject")
 public class Subject {
+
+    public Subject(String name, Integer academicLevel) {
+        this.name = name;
+        this.academicLevel = academicLevel;
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "subject_id")
     private Long subjectId;
     @Column(name = "name")
     private String name;
+    @Column(name = "academic_level")
+    private Integer academicLevel;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "subject_grade",
         joinColumns = @JoinColumn(name = "subject_id",referencedColumnName = "subject_id"),

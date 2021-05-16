@@ -3,17 +3,11 @@ package com.thryts.school.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data@NoArgsConstructor
@@ -31,16 +25,28 @@ public class Session {
     private String comment;
     @Column(name = "session_date")
     private LocalDate sessionDate;
-    @Column(name = "session_time")
-    private LocalDateTime sessionTime;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "session_time_id",referencedColumnName = "session_time_id")
+    private SessionTime sessionTime;
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "student_id", referencedColumnName = "contact_id")
     private Student student;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "contact_id", referencedColumnName = "contact_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "teacher_id", referencedColumnName = "contact_id")
     private Teacher teacher;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "subject_id", referencedColumnName = "subject_id")
     private Subject subject;
 
+    public Session(LocalDate sessionDate,
+                   SessionTime sessionTime,
+                   Student student,
+                   Teacher teacher,
+                   Subject subject) {
+        this.sessionDate = sessionDate;
+        this.sessionTime = sessionTime;
+        this.student = student;
+        this.teacher = teacher;
+        this.subject = subject;
+    }
 }

@@ -13,16 +13,16 @@ import javax.persistence.Table;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "roles")
-public class Role {
+@Table(name = "gender")
+public class Gender {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_id")
-    private Long roleId;
-    @Column(name = "role_name", unique = true)
-    private String roleName;
+    @Column(name = "gender_id")
+    private Long genderId;
+    @Column(name = "name", unique = true)
+    private String name;
 
-    public Role(String roleName) {
-        this.roleName = roleName;
+    public Gender(String name) {
+        this.name = name;
     }
 }

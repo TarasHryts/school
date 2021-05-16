@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,10 +19,10 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "teacher")
 public class Teacher extends Contact{
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "teacher_id")
-//    private Long teacherId;
+    public Teacher(String firstName, String lastName, String surName, Integer age,
+                   LocalDate birthDayDate, String email, String password) {
+        super(firstName, lastName, surName, age, birthDayDate, email, password);
+    }
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "teacher_grade",
@@ -34,10 +35,4 @@ public class Teacher extends Contact{
         joinColumns = @JoinColumn(name = "contact_id", referencedColumnName = "contact_id"),
         inverseJoinColumns = @JoinColumn(name = "subject_id", referencedColumnName = "subject_id"))
     private Set<Subject> subjects = new HashSet<>();
-
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinTable(name = "teacher_parent",
-//        joinColumns = @JoinColumn(name = "teacher_id", referencedColumnName = "contact_id"),
-//        inverseJoinColumns = @JoinColumn(name = "parent_id", referencedColumnName = "contact_id"))
-//    private Set<Parent> parents = new HashSet<>();
 }
